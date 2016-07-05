@@ -1,0 +1,14 @@
+.git
+.gitignore
+.dockerignore
+LICENSE
+VERSION
+README.md
+Changelog.md
+Makefile
+Dockerfile
+Dockerfile.bak
+docker-compose.yml
+
+/*
+!/Gemfile
