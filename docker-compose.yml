@@ -1,14 +1,29 @@
+# image_prefix: index.tenxcloud.com/docker_library/
 version: '2'
 services:
   web:
     build: .
-    command: bin/rails s -p 3000 -b '0.0.0.0'
+    command: ./script/start.sh
     volumes:
       - .:/webapp
+    volumes_from:
+      - bundle
     ports:
       - "3000:3000"
-    depends_on:
+    links:
       - db
+  bundle:
+    image: busybox
+    volumes:
+      - /bundle
   db:
     image: postgres
-    # image: index.tenxcloud.com/docker_library/postgres
+    volumes_from:
+      - db_data
+    ports:
+      - "15432:5432"
+  db_data:
+    image: busybox
+    volumes:
+      - /var/lib/postgresql/data
+
